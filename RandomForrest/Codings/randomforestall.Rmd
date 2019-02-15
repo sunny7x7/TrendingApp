@@ -1,0 +1,28 @@
+---
+title: "randomforest"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+updownfvm <- read.csv("updownfvm.csv")
+library("randomForest")
+require("randomForest")
+
+ish <- data.frame(updownfvm$Rating, updownfvm$Reviews, updownfvm$Size, updownfvm$Installs,updownfvm$Type, updownfvm$Price, updownfvm$Content.Rating, updownfvm$Last.Updated, updownfvm$Android.Ver)
+set.seed(02102000)
+train <- sample(rownames(ish), nrow(ish)*4/5)
+rating.rf=randomForest(ish$updownfvm.Installs ~ ., data=ish, subset = train)
+rating.rf
+
+plot(rating.rf)
+
+ish3 <- data.frame(updownfvm$Rating, updownfvm$Reviews, updownfvm$Size, updownfvm$Installs,updownfvm$Type, updownfvm$Price, updownfvm$Content.Rating, updownfvm$Last.Updated, updownfvm$Android.Ver)
+set.seed(02102000)
+train <- sample(rownames(ish3), nrow(ish3)*4/5)
+rating2.rf=randomForest(ish3$updownfvm.Installs ~ ., data=ish, subset = train)
+rating2.rf
+
+plot(rating2.rf)
+```
