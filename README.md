@@ -1,11 +1,48 @@
 
+
+
 ![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
+# TrendingApp #
 
 
 
+#### *Abstract* #####
+
+This project focuses on studying the different methods of machine learning to determine the best possible way to predict the indicator point to a successful Google App. Our main objective of the research is to understand the construction and functionality of Google application to help applications hit the market as a “trendy app”.We executed Machine Learning/Modeling procedures through Rstudio packages such as Reduced Rank Regression (RRR package tag) and Random Forest ( forest package tag) and functions like stepwise. For analytical purposes, we used packages like (....) to create the best informative and colorfully stimulating graphs that can be understood in one setting. 
+
+
+##### *Contributors* #####
+
+*  Sung Hee (Sunny) Hong
+ 
+* Ishana Narayanan
+
+
+##### *Motivation* #####
+
+
+## Methodology: Data Cleaning ##
+
+** *Removing "NA" (Missing Values)* **
+
+** *Change size Column* **
+
+** *Converting Categorical data* **
 
 
 
+## Methodology: Analysis & Research ##
 
-# TrendingApp
-To predict the trend(construction) of different type &amp; functionality of an app in the future through analyzing ratings, popularity, reviews, and etc. In the end for this data: to help companies determine which genre or type to invest in the future
+
+## Methodology: Visualization ##
+
+## Methodology: Machine Learning ##
+
+** *Linear Regression* **
+
+** *Multiple Linear Regression* **
+
+** *Final Model: Reduced Rank Forest* **
+
+
+## *Future Work* ##
