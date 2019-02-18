@@ -1,7 +1,3 @@
-
-
-
-![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
 # TrendingApp #
 
 
@@ -18,16 +14,16 @@ This project focuses on studying the different methods of machine learning to de
 * Ishana Narayanan
 
 
-##### *Motivation* #####
+***Motivation***
 
 
 ## Methodology: Data Cleaning ##
 
-** *Removing "NA" (Missing Values)* **
+***Removing "NA" (Missing Values)***
 
-** *Change size Column* **
+***Change size Column***
 
-** *Converting Categorical data* **
+***Converting Categorical data***
 
 
 
@@ -38,11 +34,11 @@ This project focuses on studying the different methods of machine learning to de
 
 ## Methodology: Machine Learning ##
 
-** *Linear Regression* **
+***Linear Regression***
 
-** *Multiple Linear Regression* **
+***Multiple Linear Regression***
 
-** *Final Model: Reduced Rank Forest* **
+***Final Model: Reduced Rank Forest***
 
 
 ## *Future Work* ##
