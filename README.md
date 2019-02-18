@@ -1,3 +1,8 @@
+
+
+
+
+![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
 # TrendingApp #
 
 
@@ -42,3 +47,4 @@ This project focuses on studying the different methods of machine learning to de
 
 
 ## *Future Work* ##
+
