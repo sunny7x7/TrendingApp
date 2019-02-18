@@ -47,7 +47,7 @@ This project focuses on studying the different methods of machine learning to de
 
 
 ## *Future Work* ##
-
+![d](more.png)
 
 
 
