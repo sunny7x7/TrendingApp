@@ -50,7 +50,6 @@ This project focuses on studying the different methods of machine learning to de
 
 
 
-![Graph:](./Data Science/visualization/more.png)
 
 
 
