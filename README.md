@@ -50,6 +50,4 @@ This project focuses on studying the different methods of machine learning to de
 
 
 
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
 
