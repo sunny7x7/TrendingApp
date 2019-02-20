@@ -89,7 +89,10 @@ All of our data visualization were proceeded with numerical variables (Reviews,T
 
 **1. Number of Data Entries per Category** 
 
-**Findings:** Game and Family category have the most number of the applications in the store. 
+**Findings:** This graph helps us visualize the amount of data we are working with each category. Through this bar graph we see that category of family and game have an enormous amount of entries where as other categories only have low number of entries. This poses issues with the accuracy in the random forrest. Because we believe that each category produces different characteristics of an app we concluded that family and game category will cause a unequal amount of trees pulling
+
+
+- should talk about the skewness
 
 ![](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/number%20of%20data%20entries%20per%20category.png)
  
