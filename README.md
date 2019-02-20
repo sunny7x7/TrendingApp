@@ -1,4 +1,5 @@
 
+
 ![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
 # TrendingApp #
 
@@ -39,7 +40,10 @@ All of our data visualization were proceeded with numerical variables (Reviews,T
 
 **Findings:** Game and Family category have the most number of the applications in the store. 
 
+
+
 Ishana has the graphs
+
  
 **2. Matrix Scatter Plot**
 
@@ -47,13 +51,21 @@ Ishana has the graphs
 The level of correlation is color coordinated from highest to lowest.
 (Red, Yellow, Blue) We also added more columns such as Ratings x Installs to observe the analyze the relation. 
 
+
+
+
 Ishana has the graphs 
+
+
+
 
 **3. Ratings vs. Installs** 
 
 **Findings:** Where the intensity of most points are located in. 
+![](assets/readmeTrendyApps-276f2c6e.png)
 
-![image](visualization/more.png)
+
+
 
 ## Methodology: Machine Learning ##
 
@@ -72,7 +84,7 @@ e = yRatings - yhat
 plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit PREDICTOR RATINGS ')+ abline(h = 0, lty = 2)
 
 ```
-![image](visualization/MultiResidual.png)
+![](assets/readmeTrendyApps-088b513f.png)
 
 
 
@@ -106,5 +118,7 @@ rrr
 ## *Future Work* ##
 
 In conclusion, our reduced rank regression model needs further improvement. Due to the limited information online about this modeling method, we are in the process of researching. We will also be working on performance metrics for random forest, multilinear regression, and reduced rank models to present summaries and key results. To persuade that our project outcome is significant,  we are planning to learn how to analyze our numerical summaries and model to communicate our key results and analysis to our audience.  
+
+
 
 
