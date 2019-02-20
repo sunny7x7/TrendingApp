@@ -27,20 +27,11 @@ An average of 6,140 apps are created and uploaded to Google Play Store daily. Wi
 
 To begin, we searched Kaggle for a data set which has a variety of features regarding popular apps. We found the data set “Google Play Store Apps,” which contains 10,841 rows and 13 columns. Details about the information within each column is listed below.
 
+![](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/Screen%20Shot%202019-02-19%20at%209.25.13%20PM.png)
+![](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/Screen%20Shot%202019-02-19%20at%209.26.24%20PM.png)
 
-* **App** -  Name of the application
-* **Category**- Category which the app belongs to
+* **List of Category**- Category which the app belongs to
   * _Art and Design, Auto and Vehicles, Beauty, Books and Reference, Business, Comics, Communication, Dating, Education, Entertainment, Events, Finance, Food and Drink, Health and Fitness, House and Home, Libraries and Demo, Lifestyle, Game, Family, Medical, Social, Shopping, Photography, Sports, Travel and Local, Tools, Personalization, Productivity, Parenting, Weather, Video Players, News and Magazines, Maps and Navigation_
-* **Reviews**- Number of user reviews for the app
-* **Size**- Size of the app (amount of storage as when scraped)
-* **Installs**- Number of user downloads/installs for the app
-* **Type**- Paid or free
-* **Price**- Price of the app (as when scraped)
-* **Content Rating**- Age group the app is targeted at such as Children, Mature 21+, Adult
-* **Genres**- Similar to category as both describe the type of app
-* **Last Updated**- Date when the app was last updated on Play Store (as when scraped)
-* **Current Ver**- Current version of the app available on Play Store (as when scraped)
-* **Android Ver**- Minimum required Android version for the app to function (as when scraped)
 
 
 
@@ -59,7 +50,6 @@ The installs column originally had a plus sign at the end of each value, so we c
  * **Size Column**
  
  Here, “M” or “k” following the numeric values were removed, and the numbers were scaled to their actual size. For example, data entry 5.6M was converted to 5,600,000. Lastly, NA values were also replaced with the mean size sorted by category.
-
 
  We changed each category’s Size column missing value to the mean of that category size. 
 
