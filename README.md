@@ -1,6 +1,5 @@
 
 
-
 ![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
 # TrendingApp #
 
@@ -29,6 +28,7 @@ This project focuses on studying the different methods of machine learning to de
 
 ***Converting Categorical data***
 
+***Adding Extra column for analysis***
 
 
 ## Methodology: Analysis & Research ##
@@ -64,8 +64,7 @@ Ishana has the graphs
 
 **Findings:** Where the intensity of most points are located in. 
 
-![](visualization/more.png) 
-![](assets/readmeTrendyApps-276f2c6e.png)
+![](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/more.png) 
 
 
 
@@ -74,8 +73,19 @@ Ishana has the graphs
 
 
 ## Methodology: Machine Learning ##
+***Random Forest***
 
-***Random Forest ***
+
+
+
+
+
+
+
+
+
+
+
 
 
 ***Multiple Linear Regression***
@@ -92,7 +102,7 @@ fit= lm(formula = yRatings ~ x7Lu + x4Ty + x1Re + x2Si + x5Pr)
 e = yRatings - yhat
 plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit PREDICTOR RATINGS ')+ abline(h = 0, lty = 2)
 ```
-![](assets/readmeTrendyApps-088b513f.png)
+![](ahttps://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/MultiResidual.png)
 
 
  We are using Installs as our predictor value here.
@@ -110,7 +120,8 @@ e = yRatings - yhat
 plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit. PREDICTOR INSTALLS ') + abline(h = 0, lty = 2)
 summary(fit)
 ```
-![](assets/readmeTrendyApps-07ea1a22.png)
+![](ahttps://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/INSTALLSVS.png)
+
 
 
 
@@ -125,6 +136,11 @@ Reduced Rank Regression is a method in multivariate regression that uses the met
 
 
 This model is useful in helping us predict multiple Y values by shrinking the variations created by the functional relationship between the Y values. Therefore, we will be using this model to predict the Y values (Ratings and Installs) with the rest of numerical x values. 
+
+
+
+
+
 
 ```js
 #install.packages("rrr")
@@ -141,12 +157,20 @@ rrr<-rrr::rrr( datxx , datyy ,rank=1)
 rrr
 ```
 
+ 
+
+
+
+
+
 
 
 
 ## *Future Work* ##
 
 In conclusion, our reduced rank regression model needs further improvement. Due to the limited information online about this modeling method, we are in the process of researching. We will also be working on performance metrics for random forest, multilinear regression, and reduced rank models to present summaries and key results. To persuade that our project outcome is significant,  we are planning to learn how to analyze our numerical summaries and model to communicate our key results and analysis to our audience.  
+
+
 
 
 
