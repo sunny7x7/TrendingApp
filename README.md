@@ -31,7 +31,7 @@ To begin, we searched Kaggle for a data set which has a variety of features rega
 
 Dataset continuing...
 
-<img src="https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/Screen%20Shot%202019-02-19%20at%209.26.24%20PM.png" width="630" >
+<img src="https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/Screen%20Shot%202019-02-19%20at%209.26.24%20PM.png" width="600" >
 
 * **List of Category**- Category which the app belongs to
   * _Art and Design, Auto and Vehicles, Beauty, Books and Reference, Business, Comics, Communication, Dating, Education, Entertainment, Events, Finance, Food and Drink, Health and Fitness, House and Home, Libraries and Demo, Lifestyle, Game, Family, Medical, Social, Shopping, Photography, Sports, Travel and Local, Tools, Personalization, Productivity, Parenting, Weather, Video Players, News and Magazines, Maps and Navigation_
