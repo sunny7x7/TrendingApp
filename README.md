@@ -1,5 +1,6 @@
 
 
+
 ![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
 # TrendingApp #
 
@@ -62,18 +63,26 @@ Ishana has the graphs
 **3. Ratings vs. Installs** 
 
 **Findings:** Where the intensity of most points are located in. 
+
+![](visualization/more.png) 
 ![](assets/readmeTrendyApps-276f2c6e.png)
+
+
+
 
 
 
 
 ## Methodology: Machine Learning ##
 
-***Radom Forest ***
+***Random Forest ***
 
 
 ***Multiple Linear Regression***
-The StepWise function selects variables sequentially that best fits the model from all possible subset models. 
+Multiple linear regression is a technique to explain the relationship between one Y value (response value or installs) and two or more X values (predictor value). The StepWise function helps select variables sequentially that best fits the model from all possible subset models. 
+
+
+ We are using Ratings as our predictor value here.
 ```js
 mod0 = lm(yRatings~1)
 mod.upper = lm(yRatings ~ x1Reviews + x2Size + x3Installs + x4Type + x5Price + x6ContentRating + x7LastUpdate + x8AndroidVersion )
@@ -82,9 +91,29 @@ step(mod0, scope = list (lower = mod0, upper = mod.upper))
 fit= lm(formula = yRatings ~ x7Lu + x4Ty + x1Re + x2Si + x5Pr)
 e = yRatings - yhat
 plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit PREDICTOR RATINGS ')+ abline(h = 0, lty = 2)
-
 ```
 ![](assets/readmeTrendyApps-088b513f.png)
+
+
+ We are using Installs as our predictor value here.
+The second residual plot is done after log transformation method. 
+ 
+```js
+mod0 = lm(x3In~1)
+mod.upper = lm( x3In~ yRatings + x1Re + x2Si + x4Ty + x5Pr + x6Cr + x7Lu + x8Av )
+step(mod0, scope = list (lower = mod0, upper = mod.upper))
+
+fit= lm(formula = x3In ~ x1Re)
+
+yhat=fitted(fit)
+e = yRatings - yhat
+plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit. PREDICTOR INSTALLS ') + abline(h = 0, lty = 2)
+summary(fit)
+```
+![](assets/readmeTrendyApps-07ea1a22.png)
+
+
+
 
 
 
@@ -92,11 +121,11 @@ plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit
 
 ***Final Model: Reduced Rank Regression***
 
-Reduced Rank Regression and Multivariate both work with model where there are multiple Y outcome and multiple X inputs. Reduced Rank Regression is favorable when there seems to be a "functional relationship between the predictors and each response is clearly similar."
+Reduced Rank Regression is a method in multivariate regression that uses the method of reduced rank restriction on the coefficient matrix. Reduced Rank Regression work with model where there are multiple Y outcome and multiple X inputs. 
 
 
+This model is useful in helping us predict multiple Y values by shrinking the variations created by the functional relationship between the Y values. Therefore, we will be using this model to predict the Y values (Ratings and Installs) with the rest of numerical x values. 
 
-" uniresponse and multiresponse situations. " 
 ```js
 #install.packages("rrr")
 dat7<- read.csv("fvm2.csv")
@@ -112,13 +141,12 @@ rrr<-rrr::rrr( datxx , datyy ,rank=1)
 rrr
 ```
 
- 
+
 
 
 ## *Future Work* ##
 
 In conclusion, our reduced rank regression model needs further improvement. Due to the limited information online about this modeling method, we are in the process of researching. We will also be working on performance metrics for random forest, multilinear regression, and reduced rank models to present summaries and key results. To persuade that our project outcome is significant,  we are planning to learn how to analyze our numerical summaries and model to communicate our key results and analysis to our audience.  
-
 
 
 
