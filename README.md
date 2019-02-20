@@ -20,7 +20,7 @@ An average of 6,140 apps are created and uploaded to Google Play Store daily. Wi
 
 
 
-##Methodology: Collecting Data##
+## Methodology: Collecting Data ##
 
 ***Kaggle***
 
@@ -43,7 +43,7 @@ To begin, we searched Kaggle for a data set which has a variety of features rega
 
 
 
-##Methodology: Data Cleaning##
+## Methodology: Data Cleaning ##
 
 ***Removing "NA" (Missing Values)***
 
