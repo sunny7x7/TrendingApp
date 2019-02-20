@@ -1,5 +1,4 @@
 
-
 ![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
 # TrendingApp #
 
@@ -64,7 +63,7 @@ Ishana has the graphs
 
 **Findings:** Where the intensity of most points are located in. 
 
-![](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/more.png) 
+![pic](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/more.png) 
 
 
 
@@ -73,6 +72,11 @@ Ishana has the graphs
 
 
 ## Methodology: Machine Learning ##
+**Introduction**
+
+
+
+
 ***Random Forest***
 
 
@@ -102,7 +106,8 @@ fit= lm(formula = yRatings ~ x7Lu + x4Ty + x1Re + x2Si + x5Pr)
 e = yRatings - yhat
 plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit PREDICTOR RATINGS ')+ abline(h = 0, lty = 2)
 ```
-![](ahttps://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/MultiResidual.png)
+
+![pic](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/MultiResidual.png)
 
 
  We are using Installs as our predictor value here.
@@ -120,7 +125,8 @@ e = yRatings - yhat
 plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit. PREDICTOR INSTALLS ') + abline(h = 0, lty = 2)
 summary(fit)
 ```
-![](ahttps://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/INSTALLSVS.png)
+
+![pic](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/INSTALLSVS.png)
 
 
 
@@ -169,8 +175,6 @@ rrr
 ## *Future Work* ##
 
 In conclusion, our reduced rank regression model needs further improvement. Due to the limited information online about this modeling method, we are in the process of researching. We will also be working on performance metrics for random forest, multilinear regression, and reduced rank models to present summaries and key results. To persuade that our project outcome is significant,  we are planning to learn how to analyze our numerical summaries and model to communicate our key results and analysis to our audience.  
-
-
 
 
 
