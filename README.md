@@ -107,7 +107,7 @@ To get a better indication about relationship between Rating and Installs, we cr
 
 **3. Ratings vs. Installs** 
 
-**Findings:** Where the intensity of most points are located in. 
+**Findings:** There is definite evidence that there is a trend in the number of installs and how high the rating is. However, though the intensity of the points follows this low correlation, we see the there are a significant amount of apps with outstanding ratings and installs at the same time. We do believe that these outstanding apps can be analyzed more. 
 ![pic](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/more.png) 
 
 
