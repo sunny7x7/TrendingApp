@@ -1,6 +1,5 @@
-
 ![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
-# TrendingApp #
+# Trending App #
 
 ***Contributors***
 
@@ -10,9 +9,8 @@
 
 _**Abstract**_
 
-This project focuses on studying the different methods of machine learning to determine the best possible way to predict the indicator point to a successful Google App. Our main objective of the research is to understand the construction and functionality of Google application to help applications hit the market as a “trendy app”.We executed Machine Learning/Modeling procedures through Rstudio packages such as Reduced Rank Regression ([RRR package](https://github.com/chrisaddy/rrr)) and Random Forest ( [Random Forest package](https://github.com/cran/randomForest) ) and Mass([Stepwise Function](https://github.com/cran/MASS/blob/master/R/stepAIC.R)) . For analytical purposes, we used packages like ([ggplot2](link here)) to create the best informative and colorfully stimulating graphs that can be understood in one setting. 
-
-
+This project focuses on studying the different methods of machine learning to determine the best possible way to predict the indicator point to a successful Google App. Our main objective of the research is to understand the construction and functionality of Google application to help applications hit the market as a “trendy app”. We executed Machine Learning/Modeling procedures through Rstudio packages such as Reduced Rank Regression ([RRR package](https://github.com/chrisaddy/rrr)) and Random Forest ([Random Forest package](https://github.com/cran/randomForest)) and Mass ([Stepwise Function](https://github.com/cran/MASS/blob/master/R/stepAIC.R)). For analytical purposes, we used packages like ([ggplot2](https://github.com/tidyverse/ggplot2)) to create the best informative and colorfully stimulating graphs that can be understood in one setting.
+For simpler graphs, we used Tableau. 
 
 
 ***Motivation***
@@ -22,7 +20,7 @@ An average of 6,140 apps are created and uploaded to Google Play Store daily. Wi
 
 
 
-## Methodology: Collecting Data##
+## Methodology: Collecting Data 
 
 ***Kaggle***
 
@@ -45,11 +43,11 @@ To begin, we searched Kaggle for a data set which has a variety of features rega
 
 
 
-## Methodology: Data Cleaning ##
+##Methodology: Data Cleaning##
 
 ***Removing "NA" (Missing Values)***
 
-After downloading the csv file, we removed 44 rows of data which contained NA values that could not have otherwise been replaced by another value.
+After downloading the csv file, we removed 44 rows of data which contained NA values that could not have otherwise been replaced.
 
 ***Removing "+" Sign in Installs Column***
 
@@ -94,20 +92,20 @@ newvals <- temp_df$V1*temp_df$V2
  * **Content Rating**
  
  Change content rating column to numerical values. 
-  * Everyone =1
-  * Everyone =1
-  * Everyone+10 =2
-  * Teen =3
-  * Mature 17+ =4
-  * AdultsOnly 18+ =5
+    
+    * Everyone =1
+    * Everyone+10 =2
+    * Teen =3
+    * Mature 17+ =4
+    * Adults Only 18+ =5
 
  * **Last Update**
 
- Here, we converted the month to its corresponding numeric value and removed the dash between the day, month, and year. 
+Converted month to its corresponding numeric value and removed the dash between the day, month, and year. 
  
  * **Android Version**
  
- For this column, we deleted the period between the version numbers and replaced NA values with the average Android Version sorted by category. 
+Deleted the period between the version numbers and replaced NA values with the average Android Version sorted by category. 
 
 ```js
 visual7$Android.Ver <- gsub("4.0.3 and up", "403", visual7$Android.Ver)
@@ -257,6 +255,7 @@ rrr
 ## *Future Work* ##
 
 In conclusion, our reduced rank regression model needs further improvement. Due to the limited information online about this modeling method, we are in the process of researching. We will also be working on performance metrics for random forest, multilinear regression, and reduced rank models to present summaries and key results. To persuade that our project outcome is significant,  we are planning to learn how to analyze our numerical summaries and model to communicate our key results and analysis to our audience.  
+
 
 
 
