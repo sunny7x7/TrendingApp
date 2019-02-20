@@ -1,4 +1,5 @@
 ![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
+
 # Trendy Apps #
 
 ***Contributors***
@@ -53,41 +54,14 @@ After downloading the csv file, we removed 44 rows of data which contained NA va
 
 The installs column originally had a plus sign at the end of each value, so we can use strsplit to remove this symbol. 
 
-```js
-library(stringr)
-#change size from a factor to a character so that we can use strsplit
-data_1$Installs <- as.character(data_1$Installs)
-#splitting the variable by “M”
-data_1$Installs = substr(data_1$Installs,1,nchar(data_1$Installs)-1)
-head(data_1)
-data_1$Installs <- as.factor(data_1$Installs)
-
-```
 ***Converting Columns to Numerical Data***
 
  * **Size Column**
  
  Here, “M” or “k” following the numeric values were removed, and the numbers were scaled to their actual size. For example, data entry 5.6M was converted to 5,600,000. Lastly, NA values were also replaced with the mean size sorted by category.
 
- ```js
-google$Size <- as.character(google$Size) 
-num <- unlist(strsplit(google$Size, “M”) 
-temp_df <- as.data.frame(cbind(as.character(numz), 1000000)))
-temp_df$V1 <- as.character(temp_df$V1)
-temp_df$V2 <- as.numeric(as.character(temp_df$V2))
-newvals <- temp_df$V1*temp_df$V2
- ```
+
  We changed each category’s Size column missing value to the mean of that category size. 
-```js
- library(dplyr)
- meanz <- google %>% group_by(Category) %>% summarize(Mean = mean(Size, na.rm=TRUE))
- meanz$Category <- as.character(meanz$Category)
- for(i in 2:nrow(meanz)) {
-   temp <- dat[dat$Category == meanz[2,1],]
-   temp$Size[is.na(temp$Size)] <- meanz[2,2]
-   temp$Size <- unlist(temp$Size)
-   dat$Size <- temp$Size}
-```
 
  * **Content Rating**
  
@@ -107,9 +81,7 @@ Converted month to its corresponding numeric value and removed the dash between 
  
 Deleted the period between the version numbers and replaced NA values with the average Android Version sorted by category. 
 
-```js
-visual7$Android.Ver <- gsub("4.0.3 and up", "403", visual7$Android.Ver)
-```
+
 
 ## Methodology: Analysis & Research ##
 Through research, we found out that the best indicator point of a successful app from our data set was either Installs or Rating column.
@@ -155,25 +127,9 @@ Random Forest model for regression uses the concept of a decision tree to make p
 
 Before building our random forest model, we implemented upsampling and downsampling techniques to balance the amount of data in each category. 
 
-```js
-# downsample
-fambam <- fvm3[fvm3$Category == "FAMILY",]
-set.seed(11)
-remfam <- sample(as.numeric(rownames(fambam)), nrow(fambam)*1/3)
-newdf <- fvm3[-remfam, ] 
-nrow(newdf[newdf$Category == "FAMILY",]) # number of rows for family reduced to 1165
-```
 With this modified data set, we constructed two random forest models, one to predict the rating and another to predict the number of installs.
 
-```js
-#building random forest model
-dat <- data.frame(updownfvm$Rating, updownfvm$Reviews, updownfvm$Size, updownfvm$Installs,updownfvm$Type, updownfvm$Price, updownfvm$Content.Rating, updownfvm$Last.Updated, updownfvm$Android.Ver)
-set.seed(02102000)
-train <- sample(rownames(dat), nrow(dat)*4/5)
-rating.rf=randomForest(dat$updownfvm.Installs ~ ., data=dat, subset = train)
-rating.rf
-plot(rating.rf)
-```
+
 As the number of trees in the forest increases, the predicted value for rating and number of installs becomes more accurate.
 
 ![](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/Rplot%20side%20by%20side%20final.png)
@@ -187,34 +143,12 @@ Multiple linear regression is a technique to explain the relationship between on
 
 
  We are using Ratings as our predictor value here.
-```js
-mod0 = lm(yRatings~1)
-mod.upper = lm(yRatings ~ x1Reviews + x2Size + x3Installs + x4Type + x5Price + x6ContentRating + x7LastUpdate + x8AndroidVersion )
-step(mod0, scope = list (lower = mod0, upper = mod.upper))
-
-fit= lm(formula = yRatings ~ x7Lu + x4Ty + x1Re + x2Si + x5Pr)
-e = yRatings - yhat
-plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit PREDICTOR RATINGS ')+ abline(h = 0, lty = 2)
-```
-
+ 
 ![pic](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/MultiResidual.png)
 
 
  We are using Installs as our predictor value here.
 The second residual plot is done after log transformation method. The transformation method did not show a good result.  
- 
-```js
-mod0 = lm(x3In~1)
-mod.upper = lm( x3In~ yRatings + x1Re + x2Si + x4Ty + x5Pr + x6Cr + x7Lu + x8Av )
-step(mod0, scope = list (lower = mod0, upper = mod.upper))
-
-fit= lm(formula = x3In ~ x1Re)
-
-yhat=fitted(fit)
-e = yRatings - yhat
-plot(yhat, e, xlab = 'Fitted Values', ylab = 'Residual', main = 'Residual vs Fit. PREDICTOR INSTALLS ') + abline(h = 0, lty = 2)
-summary(fit)
-```
 
 ![pic](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/INSTALLSVS.png)
 
@@ -231,21 +165,6 @@ Reduced Rank Regression is a method in multivariate regression that uses the met
 
 This model is useful in helping us predict multiple Y values by shrinking the variations created by the functional relationship between the Y values. Therefore, we will be using this model to predict the Y values (Ratings and Installs) with the rest of numerical x values. 
 
-
-```js
-#install.packages("rrr")
-dat7<- read.csv("fvm2.csv")
-
-#Data extracted with just numerical values 
-datY<-data.frame(dat7$Rating,dat7$Installs)
-datX<-data.frame(dat7$Reviews, dat7$Size,dat7$Type, dat7$Price, dat7$Content.Rating, dat7$Last.Updated, dat7$Android.Ver)
-
-
-datyy<-datY[,1:2]
-datxx<- datX[,3:7]
-rrr<-rrr::rrr( datxx , datyy ,rank=1)
-rrr
-```
 
 ... more to come 
 
