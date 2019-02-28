@@ -1,1 +1,677 @@
 
+---
+title: "DSAppspt.2"
+output: html_document
+---
+
+```{r}
+
+#install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+library(ggplot2)
+
+dat7<- read.csv("fvm2.csv")
+table(dat7$Category)
+
+#Data extracted with just numerical values 
+dat8<- data.frame(dat7$Rating, dat7$Reviews, dat7$Size, dat7$Installs,dat7$Type, dat7$Price, dat7$Content.Rating, dat7$Last.Updated, dat7$Android.Ver)
+
+
+yRatings <- dat8$dat7.Rating
+x1Re<- dat8$dat7.Reviews
+x2Si<-dat8$dat7.Size
+x3In<-dat8$dat7.Installs
+x4Ty<- dat8$dat7.Type
+x5Pr<- dat8$dat7.Price 
+x6Cr<- dat7$Content.Rating
+x7Lu<-dat7$Last.Updated
+x8Av<-dat7$Android.Ver
+```
+
+### 3: Multiple Linear Regression / BY CATEGORY  - Data: fmv2  ###
+
+
+### RESPONSE: RATINGS ###
+
+```{r}
+
+
+
+
+c<-c( "ART_AND_DESIGN" , "AUTO_AND_VEHICLES", "BEAUTY" ,"BOOKS_AND_REFERENCE", "BUSINESS", "COMICS", "COMMUNICATION", "DATING", "EDUCATION", "ENTERTAINMENT", "EVENTS","FAMILY", "FINANCE", "FOOD_AND_DRINK", "GAME", "HEALTH_AND_FITNESS", "HOUSE_AND_HOME","LIBRARIES_AND_DEMO",  "LIFESTYLE", "MAPS_AND_NAVIGATION", "MEDICAL", "NEWS_AND_MAGAZINES", "PARENTING","PERSONALIZATION" , "PHOTOGRAPHY", "PRODUCTIVITY","SHOPPING",  "SOCIAL", "SPORTS", "TOOLS", "TRAVEL_AND_LOCAL", "VIDEO_PLAYERS", "WEATHER"  )
+
+#for( i in c) 
+#{
+ # print(i)
+ # ii <- dat7[ which(dat7$Category ==i),] 
+ # yRatings <- ii$Rating
+ # x1Re<- ii$Reviews
+ # x2Si<-ii$Size
+ # x3In<-ii$Installs
+ # x4Ty<- ii$Type
+ # x5Pr<- ii$Price 
+ # x6Cr<- ii$Content.Rating
+ # x7Lu<- ii$Last.Updated
+ # x8Av<- ii$Android.Ver
+  
+ # mod0 = lm(yRatings~1)
+ # mod.upper = lm(yRatings ~ x1Re + x2Si + x3In + x4Ty + x5Pr + x6Cr + x7Lu + x8Av )
+ # step<- step(mod0, scope = list (lower = mod0, upper = mod.upper))
+ # print(step$call)
+
+#}
+```
+
+
+
+
+"ART_AND_DESIGN"
+```{r}
+
+### RESPONSE: RATING ###
+mod=lm(yRatings ~ x4Ty)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Ratings")
+
+#Transformation
+
+### RESPONSE: INSTALLS ### 
+
+mod=lm(formula = x3In ~ x1Re + x6Cr)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+
+## INSTALLS BOXCOX TRANSFORMATION ##
+mod=lm(formula = x3In^(0.065) ~ x1Re + x6Cr)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+
+## TRANSFORMATION ##
+#different transformations done picked the best 
+
+#mod=lm(formula = x3In ~ log(x1Re) + log(x6Cr))
+#ggplot(mod, aes(.fitted, .resid)) +
+#  geom_point() +
+ # geom_hline(yintercept = 0) +
+#  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+
+#mod=lm(formula = x3In ~ log(x1Re) + x6Cr)
+#ggplot(mod, aes(.fitted, .resid)) +
+#  geom_point() +
+#  geom_hline(yintercept = 0) +
+#  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+mod=lm(formula = x3In^(0.065) ~ log(x1Re) + log(x6Cr))
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+
+
+```
+
+"AUTO_AND_VEHICLES"
+```{r}
+mod= lm(formula = yRatings ~ x8Av + x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Auto and Vehicles: Response= Ratings ")
+
+
+mod=lm(formula = x3In ~ x1Re + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Auto and Vehicles: Response= Installs ")
+
+## INSTALLS BOXCOX TRANSFORMATION ##
+mod=lm(formula = x3In^(0.055) ~ x1Re + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Auto and Vehicles: Response= Installs ")
+
+
+
+```
+
+
+"BEAUTY"
+```{r}
+mod= lm(formula = yRatings ~ 1)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("BEAUTY: Response=Ratings ")
+
+
+mod=lm(formula = x3In ~ x1Re + yRatings + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("BEAUTY: Response= Installs ")
+
+## INSTALLS BOXCOX TRANSFORMATION ##
+mod=lm(formula = x3In^(0.055) ~ x1Re + yRatings + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("BEAUTY: Response= Installs ")
+
+```
+
+
+"BOOKS_AND_REFERENCE"
+```{r}
+
+mod= lm(formula = yRatings ~ 1)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Books And References: Response= Ratings ")
+
+
+lm(formula = x3In ~ x1Re + x6Cr + yRatings)
+mod=ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Books And References: Response= Installs ")
+
+
+## INSTALLS BOXCOX TRANSFORMATION ##
+mod=lm(formula = x3In^(0.055) ~ x1Re + x6Cr + yRatings)
+mod=ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Books And References: Response= Installs ")
+
+```
+
+"BUSINESS"
+```{r}
+mod= lm(formula = yRatings ~ x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Business: Response= Ratings ")
+
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Business: Response= Installs ")
+
+## INSTALLS BOXCOX TRANSFORMATION ##
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Business: Response= Installs ")
+```
+
+"COMICS"
+```{r}
+mod=lm(formula = yRatings ~ x6Cr + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Comics: Response= Ratings")
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Comics: Response= Installs ")
+
+## INSTALLS BOXCOX TRANSFORMATION ##
+mod=lm(formula = x3In^(0.055) ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Comics: Response= Installs ")
+```
+
+"COMMUNICATION"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x6Cr)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Communication: Response= Ratings ")
+
+
+mod=lm(formula = x3In ~ x1Re + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Communication: Response= Installs ")
+
+```
+
+"DATING"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Dating: Response= Ratings ")
+
+
+
+mod=lm(formula = x3In ~ x1Re + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Dating: Response= Installs ")
+```
+
+"EDUCATION"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x4Ty + x1Re + x3In)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Education: Response= Ratings ")
+
+mod=lm(formula = x3In ~ x1Re + x7Lu + yRatings)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Education: Response= Installs ")
+```
+
+"ENTERTAINMENT"
+```{r}
+mod=lm(formula = yRatings ~ x1Re + x4Ty)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Entertainment: Response= Ratings ")
+
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Entertainment: Response= Installs ")
+```
+
+
+
+
+
+"EVENTS"
+```{r}
+mod=lm(formula = yRatings ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Events: Response= Ratings ")
+
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Events: Response= Installs ")
+```
+
+"FAMILY"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x4Ty + x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Family: Response= Family ")
+
+mod=lm(formula = x3In ~ x1Re + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Family: Response= Installs ")
+```
+
+"FINANCE"
+```{r}
+mod=lm(formula = yRatings ~ x1Re + x7Lu + x2Si + x4Ty)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Finance: Response= Finance ")
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Finance: Response= Installs ")
+
+```
+
+
+ "FOOD_AND_DRINK"
+```{r}
+mod=lm(formula = yRatings ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Food and Drink: Response= Ratings ")
+
+
+mod=lm(formula = x3In ~ x1Re + x8Av + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Food and Drink: Response= Installs ")
+
+```
+
+ "GAME"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x1Re + x4Ty + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Game: Response= Ratings ")
+
+mod=lm(formula = x3In ~ x1Re + x6Cr + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Game: Response= Installs ")
+
+```
+
+"HEALTH_AND_FITNESS"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Health and Fitness: Response= Ratings ")
+
+mod=lm(formula = x3In ~ x1Re + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Health and Fitness: Response= Installs ")
+
+```
+
+"HOUSE_AND_HOME"
+```{r}
+mod=lm(formula = yRatings ~ x1Re + x6Cr + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("House and Home: Response= Ratings ")
+
+mod=lm(formula = x3In ~ x1Re + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("House and Home: Response= Installs ")
+
+```
+
+"LIBRARIES_AND_DEMO"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("House and Home: Response= Libraries and Demo ")
+
+
+mod=lm(formula = x3In ~ x1Re + x7Lu + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Libraries and Demo: Response= Installs ")
+```
+
+"LIFESTYLE"
+```{r}
+mod=lm(formula = yRatings ~ x2Si + x5Pr + x4Ty + x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Lifestyle: Response= Ratings ")
+
+
+mod=lm(formula = x3In ~ x1Re + x2Si + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Lifestyle: Response= Installs ")
+```
+
+"MAPS_AND_NAVIGATION"
+```{r}
+mod=lm(formula = yRatings ~ x3In + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("Maps and Navigation: Response= Ratings ")
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Maps and Navigation: Response= Installs ")
+```
+
+"MEDICAL"
+```{r}
+mod=lm(formula = yRatings ~ x1Re + x6Cr + x7Lu + x4Ty)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Medical = Ratings")
+
+
+mod=lm(formula = x3In ~ x1Re + x4Ty)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Medical = Installs ")
+```
+
+"NEWS_AND_MAGAZINES"
+```{r}
+mod=lm(formula = yRatings ~ x2Si + x6Cr + x4Ty)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)+ ggtitle("News and Magazine: Response= News and Magazine")
+
+mod=lm(formula = x3In ~ x1Re + x6Cr)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("News and Magazine: Response= Installs ")
+```
+
+"PARENTING"
+```{r}
+mod=lm(formula = yRatings ~ x4Ty + x5Pr)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re + yRatings + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Parenting: Response= Installs ")
+
+```
+
+"PERSONALIZATION"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x4Ty + x2Si + x6Cr + x8Av + x3In)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+
+mod=lm(formula = x3In ~ x1Re + x4Ty + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Personalization: Response= Installs ")
+```
+
+"PHOTOGRAPHY"
+```{r}
+mod=lm(formula = yRatings ~ x2Si + x1Re + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Photography: Response= Installs ")
+
+```
+
+"PRODUCTIVITY"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x1Re + x8Av + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Productivity: Response= Installs ")
+```
+
+"SHOPPING""
+```{r}
+mod=lm(formula = yRatings ~ x1Re + x7Lu + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re + x6Cr + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Shopping: Response= Installs ")
+
+```
+
+
+"SOCIAL"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x6Cr + x4Ty + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Social: Response= Installs ")
+```
+
+
+"SPORTS"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Sports: Response= Installs ")
+```
+
+"TOOLS"
+```{r}
+mod=lm(formula = yRatings ~ x1Re + x7Lu + x2Si + x4Ty + x5Pr + x8Av)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re + x2Si)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Tools: Response= Installs ")
+```
+
+"TRAVEL_AND_LOCAL"
+```{r}
+mod=lm(formula = yRatings ~ x2Si + x1Re + x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Travel and Local: Response= Installs ")
+```
+
+"VIDEO_PLAYERS"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Video playes: Response= Installs ")
+```
+
+"WEATHER"
+```{r}
+mod=lm(formula = yRatings ~ x7Lu + x6Cr)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE)
+
+mod=lm(formula = x3In ~ x1Re)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Weather: Response= Installs ")
+```
+
+
