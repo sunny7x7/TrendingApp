@@ -1,0 +1,140 @@
+---
+title: "DSAppspt.2"
+output: html_document
+---
+
+```{r}
+
+#install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+#install.packages("DAAG")
+library(ggplot2)
+library(DAAG)
+
+dat7<- read.csv("fvm2.csv")
+table(dat7$Category)
+
+#Data extracted with just numerical values 
+dat8<- data.frame(dat7$Rating, dat7$Reviews, dat7$Size, dat7$Installs,dat7$Type, dat7$Price, dat7$Content.Rating, dat7$Last.Updated, dat7$Android.Ver)
+
+
+yRatings <- dat8$dat7.Rating
+x1Re<- dat8$dat7.Reviews
+x2Si<-dat8$dat7.Size
+x3In<-dat8$dat7.Installs
+x4Ty<- dat8$dat7.Type
+x5Pr<- dat8$dat7.Price 
+x6Cr<- dat7$Content.Rating
+x7Lu<-dat7$Last.Updated
+x8Av<-dat7$Android.Ver
+```
+
+### 3: Multiple Linear Regression / BY CATEGORY  - Data: fmv2  ###
+
+
+### RESPONSE: RATINGS ###
+
+```{r}
+
+
+
+
+c<-c( "ART_AND_DESIGN" , "AUTO_AND_VEHICLES", "BEAUTY" ,"BOOKS_AND_REFERENCE", "BUSINESS", "COMICS", "COMMUNICATION", "DATING", "EDUCATION", "ENTERTAINMENT", "EVENTS","FAMILY", "FINANCE", "FOOD_AND_DRINK", "GAME", "HEALTH_AND_FITNESS", "HOUSE_AND_HOME","LIBRARIES_AND_DEMO",  "LIFESTYLE", "MAPS_AND_NAVIGATION", "MEDICAL", "NEWS_AND_MAGAZINES", "PARENTING","PERSONALIZATION" , "PHOTOGRAPHY", "PRODUCTIVITY","SHOPPING",  "SOCIAL", "SPORTS", "TOOLS", "TRAVEL_AND_LOCAL", "VIDEO_PLAYERS", "WEATHER"  )
+
+#for( i in c) 
+#{
+ # print(i)
+ # ii <- dat7[ which(dat7$Category ==i),] 
+ # yRatings <- ii$Rating
+ # x1Re<- ii$Reviews
+ # x2Si<-ii$Size
+ # x3In<-ii$Installs
+ # x4Ty<- ii$Type
+ # x5Pr<- ii$Price 
+ # x6Cr<- ii$Content.Rating
+ # x7Lu<- ii$Last.Updated
+ # x8Av<- ii$Android.Ver
+  
+ # mod0 = lm(yRatings~1)
+ # mod.upper = lm(yRatings ~ x1Re + x2Si + x3In + x4Ty + x5Pr + x6Cr + x7Lu + x8Av )
+ # step<- step(mod0, scope = list (lower = mod0, upper = mod.upper))
+ # print(step$call)
+
+#}
+```
+
+
+
+
+"ART_AND_DESIGN"
+```{r}
+
+### RESPONSE: RATING ###
+mod=lm(yRatings ~ x4Ty)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Ratings")
+
+#Transformation
+
+### RESPONSE: INSTALLS ### 
+
+mod=lm(formula = x3In ~ x1Re + x6Cr)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+
+## INSTALLS BOXCOX TRANSFORMATION ##
+mod=lm(formula = x3In^(0.065) ~ x1Re + x6Cr)
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+
+## TRANSFORMATION ##
+#different transformations done picked the best 
+
+#mod=lm(formula = x3In ~ log(x1Re) + log(x6Cr))
+#ggplot(mod, aes(.fitted, .resid)) +
+#  geom_point() +
+ # geom_hline(yintercept = 0) +
+#  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+
+#mod=lm(formula = x3In ~ log(x1Re) + x6Cr)
+#ggplot(mod, aes(.fitted, .resid)) +
+#  geom_point() +
+#  geom_hline(yintercept = 0) +
+#  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+mod=lm(formula = x3In^(0.065) ~ log(x1Re) + log(x6Cr))
+ggplot(mod, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0) +
+  geom_smooth(se = FALSE) + ggtitle("Art and Design: Response= Installs ")
+
+```
+
+
+### Cross Validation ###
+```{r}
+#install.packages("DAAG")
+#library(DAAG)
+artdat<-data.frame(dat7$Installs, dat7$Reviews,dat7$Content.Rating)
+
+attach(dat7)
+CVlm(data=dat7, form.lm=formula(Installs^(0.065) ~ log(Reviews) + log(Content.Rating), plotit="Observed"))
+
+
+#CVlm(data=artdat, form.lm=formula(x3In^(0.065) ~ log(x1Re) + log(x6Cr)),
+#     plotit="Residual")
+#out <- CVlm(data=artdat, form.lm=formula(x3In^(0.065) ~ log(x1Re) + log(x6Cr)),
+#               plotit="Observed")
+#out[c("ms","df")]
+
+# Watch Data Camp on it: And then start on it 
+
+```
