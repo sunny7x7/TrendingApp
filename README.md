@@ -2,6 +2,14 @@
 
 # APPsolutely Successful! #
 
+***Future Work***
+1. Performance metrics / Research RR (office Hours) 
+2. Organizing Data
+3. Normalizing
+
+
+
+
 ***Contributors***
 
 *  **Sung Hee (Sunny) Hong**
