@@ -124,8 +124,7 @@ All of our data visualization were proceeded with numerical variables (Reviews,T
 
 **1. Number of Data Entries per Category**
 
-**Findings:** Game and Family category have the most number of the applications in the store.
-
+**Findings:** This graph helps us visualize the amount of data we are working with for each category. Through this bar graph, we see that the category family and game have an enormous amount of entries whereas other categories such as parenting have barely 200 pieces of data. This could pose issues with the random forest model. Because of its decision tree layout, random forest is more likely to interpret a data entry from a category with larger amounts of data. To remedy this, we implemented upsampling and downsampling techniques which alter the amount of data in each category. 
 ![](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/number%20of%20data%20entries%20per%20category.png)
 
 **2. Matrix Scatter Plot**
@@ -140,7 +139,7 @@ To get a better indication about relationship between Rating and Installs, we cr
 
 **3. Ratings vs. Installs**
 
-**Findings:** Where the intensity of most points are located in.
+**Findings:** There is definite evidence that there is a trend in the number of installs and how high the rating is. However, though the intensity of the points follows this low correlation, we see the there are a significant amount of apps with outstanding ratings and installs at the same time. We do believe that these outstanding apps can be analyzed more. 
 ![pic](https://raw.githubusercontent.com/sunny7x7/TrendingApp/master/Visualization/more.png)
 
 
