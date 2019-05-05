@@ -3,9 +3,10 @@
 
 ***Contributors***
 
-*  **Sung Hee (Sunny) Hong**
+*  **Sung Hee (Sunny) Hong** (Team Leader) 
 *  **Ishana Narayanan**
 
+2019 Data Science Showcase Presentation Slides: https://docs.google.com/presentation/d/14U3rY-QIoV2QX5o7z3KDqP0LZv7McKLvZP8wv1xN0GM/edit?usp=sharing 
 
 _**Abstract**_
 
