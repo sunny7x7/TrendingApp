@@ -1,5 +1,5 @@
 ![Alt Text](https://thumbs.gfycat.com/UntimelyFrankFattaileddunnart-small.gif)
-# Trending Apps #
+# APPsolutely Successful #
 
 ***Contributors***
 
